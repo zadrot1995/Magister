@@ -11,7 +11,7 @@ namespace Repository.Interfaces
     {
         IEnumerable<Company> GetCompanys();
         Company GetCompanyById(Guid id);
-        void InsertCompany(Company Company);
+        void InsertCompany(Company company);
         void DeleteCompany(Company company);
         void UpdateCompany(Company Company);
         void Save();

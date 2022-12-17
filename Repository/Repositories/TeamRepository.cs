@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class CompanyRepository : ICompanyRepository, IDisposable
+    public class TeamRepository : ITeamRepository, IDisposable
     {
         private bool disposed = false;
 
         private readonly ApplicationDbContext _context;
 
-        public CompanyRepository(ApplicationDbContext context)
+        public TeamRepository(ApplicationDbContext context)
         {
             this._context = context;
         }
 
-        public void DeleteCompany(Company company)
+        public void DeleteTeam(Team team)
         {
-            _context.Companies.Remove(company);
+            _context.Teams.Remove(team);
         }
 
         public void Dispose()
@@ -32,19 +32,19 @@ namespace Repository.Repositories
             GC.SuppressFinalize(this);
         }
 
-        public Company GetCompanyById(Guid id)
+        public Team GetTeamById(Guid id)
         {
-            return _context.Companies.Find(id);
+            return _context.Teams.Find(id);
         }
 
-        public IEnumerable<Company> GetCompanys()
+        public IEnumerable<Team> GetTeams()
         {
-            return _context.Companies;
+            return _context.Teams;
         }
 
-        public void InsertCompany(Company company)
+        public void InsertTeam(Team team)
         {
-            _context.Companies.Add(company);
+            _context.Teams.Add(team);
         }
 
         public void Save()
@@ -52,9 +52,9 @@ namespace Repository.Repositories
             _context.SaveChanges();
         }
 
-        public void UpdateCompany(Company company)
+        public void UpdateTeam(Team team)
         {
-            _context.Entry(company).State = EntityState.Modified;
+            _context.Entry(team).State = EntityState.Modified;
         }
         protected virtual void Dispose(bool disposing)
         {
