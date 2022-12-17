@@ -15,7 +15,7 @@ namespace Domain.Models
         public DateTime Created { get; set; }
         public string Password { get; set; }
         public UserRoles Role { get; set; }
-        public IEnumerable<UserSkill> UserSkills { get; set; }
+        public IEnumerable<UserSkill>? UserSkills { get; set; }
         public int Rate { get; set; }
         public string Description { get; set; }
         public string CVUrl { get; set; }
