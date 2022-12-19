@@ -36,6 +36,10 @@ namespace Repository.Repositories
         {
             return _context.Tasks.Find(id);
         }
+        public async Task<Domain.Models.Task> GetTaskByIdAsync(Guid id)
+        {
+            return await _context.Tasks.FindAsync(id);
+        }
 
         public IEnumerable<Domain.Models.Task> GetTasks()
         {
@@ -47,9 +51,19 @@ namespace Repository.Repositories
             _context.Tasks.Add(task);
         }
 
+        public async void InsertTaskAsync(Domain.Models.Task task)
+        {
+            await _context.Tasks.AddAsync(task);
+        }
+
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        public async void SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
 
         public void UpdateTask(Domain.Models.Task task)

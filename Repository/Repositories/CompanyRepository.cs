@@ -36,6 +36,10 @@ namespace Repository.Repositories
         {
             return _context.Companies.Find(id);
         }
+        public async Task<Company> GetCompanyByIdAsync(Guid id)
+        {
+            return await _context.Companies.FindAsync(id);
+        }
 
         public IEnumerable<Company> GetCompanys()
         {
@@ -46,10 +50,17 @@ namespace Repository.Repositories
         {
             _context.Companies.Add(company);
         }
-
+        public async void InsertCompanyAsync(Company company)
+        {
+            await _context.Companies.AddAsync(company);
+        }
         public void Save()
         {
             _context.SaveChanges();
+        }
+        public async void SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
 
         public void UpdateCompany(Company company)

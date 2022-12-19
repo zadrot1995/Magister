@@ -36,6 +36,10 @@ namespace Repository.Repositories
         {
             return _context.Projects.Find(id);
         }
+        public async Task<Project> GetProjectByIdAsync(Guid id)
+        {
+            return await _context.Projects.FindAsync(id);
+        }
 
         public IEnumerable<Project> GetProjects()
         {
@@ -47,9 +51,18 @@ namespace Repository.Repositories
             _context.Projects.Add(project);
         }
 
+        public async void InsertProjectAsync(Project project)
+        {
+            await _context.Projects.AddAsync(project);
+        }
+
         public void Save()
         {
             _context.SaveChanges();
+        }
+        public async void SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
 
         public void UpdateProject(Project project)

@@ -36,6 +36,10 @@ namespace Repository.Repositories
         {
             return _context.Users.Find(id);
         }
+        public async Task<User> GetUserByIdAsync(Guid id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
 
         public IEnumerable<User> GetUsers()
         {
@@ -47,9 +51,18 @@ namespace Repository.Repositories
             _context.Users.Add(user);
         }
 
+        public async void InsertUserAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
+        }
+
         public void Save()
         {
             _context.SaveChanges();
+        }
+        public async void SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
 
         public void UpdateUser(User user)

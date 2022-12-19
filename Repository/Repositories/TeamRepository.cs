@@ -36,6 +36,10 @@ namespace Repository.Repositories
         {
             return _context.Teams.Find(id);
         }
+        public async Task<Team> GetTeamByIdAsync(Guid id)
+        {
+            return await _context.Teams.FindAsync(id);
+        }
 
         public IEnumerable<Team> GetTeams()
         {
@@ -47,9 +51,19 @@ namespace Repository.Repositories
             _context.Teams.Add(team);
         }
 
+        public async void InsertTeamAsync(Team team)
+        {
+            await _context.Teams.AddAsync(team);
+        }
+
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        public async void SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
 
         public void UpdateTeam(Team team)
