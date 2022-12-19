@@ -11,9 +11,12 @@ namespace Repository.Interfaces
     {
         IEnumerable<Domain.Models.Task> GetTasks();
         Domain.Models.Task GetTaskById(Guid id);
+        Task<Domain.Models.Task> GetTaskByIdAsync(Guid id);
         void InsertTask(Domain.Models.Task task);
+        void InsertTaskAsync(Domain.Models.Task task);
         void DeleteTask(Domain.Models.Task task);
         void UpdateTask(Domain.Models.Task task);
         void Save();
+        void SaveAsync();
     }
 }

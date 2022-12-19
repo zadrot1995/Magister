@@ -11,9 +11,12 @@ namespace Repository.Interfaces
     {
         IEnumerable<User> GetUsers();
         User GetUserById(Guid id);
+        Task<User> GetUserByIdAsync(Guid id);
         void InsertUser(User user);
+        void InsertUserAsync(User user);
         void DeleteUser(User user);
         void UpdateUser(User user);
         void Save();
+        void SaveAsync();
     }
 }
