@@ -11,9 +11,12 @@ namespace Repository.Interfaces
     {
         IEnumerable<Team> GetTeams();
         Team GetTeamById(Guid id);
+        Task<Team> GetTeamByIdAsync(Guid id);
         void InsertTeam(Team team);
+        void InsertTeamAsync(Team team);
         void DeleteTeam(Team team);
         void UpdateTeam(Team team);
         void Save();
+        void SaveAsync();
     }
 }

@@ -11,9 +11,12 @@ namespace Repository.Interfaces
     {
         IEnumerable<Company> GetCompanys();
         Company GetCompanyById(Guid id);
+        Task<Company> GetCompanyByIdAsync(Guid id);
         void InsertCompany(Company company);
+        void InsertCompanyAsync(Company company);
         void DeleteCompany(Company company);
         void UpdateCompany(Company Company);
         void Save();
+        void SaveAsync();
     }
 }
