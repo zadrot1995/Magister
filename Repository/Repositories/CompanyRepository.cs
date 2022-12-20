@@ -50,7 +50,7 @@ namespace Repository.Repositories
         {
             _context.Companies.Add(company);
         }
-        public async void InsertCompanyAsync(Company company)
+        public async System.Threading.Tasks.Task InsertCompanyAsync(Company company)
         {
             await _context.Companies.AddAsync(company);
         }
@@ -58,7 +58,7 @@ namespace Repository.Repositories
         {
             _context.SaveChanges();
         }
-        public async void SaveAsync()
+        public async System.Threading.Tasks.Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }
