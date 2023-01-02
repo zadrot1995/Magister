@@ -1,3 +1,4 @@
+using API.Helpers;
 using Infrastructure.Interfaces;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Diagnostics;
@@ -21,8 +22,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<ICompanyService, CompanyService>();
-builder.Services.AddTransient<ICompanyRepository, CompanyRepository>();
+AppHelper.InjectService(builder.Services);
 
 var app = builder.Build();
 
