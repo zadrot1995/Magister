@@ -12,11 +12,11 @@ namespace Repository.Interfaces
         IEnumerable<Project> GetProjects();
         Project GetProjectById(Guid id);
         Task<Project> GetProjectByIdAsync(Guid id);
-        void InsertProject(Project project);
-        void InsertProjectAsync(Project project);
+        System.Threading.Tasks.Task InsertProject(Project project);
+        System.Threading.Tasks.Task InsertProjectAsync(Project project);
         void DeleteProject(Project project);
         void UpdateProject(Project project);
         void Save();
-        void SaveAsync();
+        System.Threading.Tasks.Task SaveAsync();
     }
 }
