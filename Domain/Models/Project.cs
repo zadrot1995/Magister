@@ -13,7 +13,7 @@ namespace Domain.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public ProjectStages ProjectStages { get; set; }
-        public IEnumerable<Task> Tasks { get; set; }
-        public IEnumerable<Team> Teams { get; set; }
+        public IEnumerable<Task>? Tasks { get; set; }
+        public IEnumerable<Team>? Teams { get; set; }
     }
 }

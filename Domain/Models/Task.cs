@@ -11,7 +11,12 @@ namespace Domain.Models
     {
         public string Title { get; set; }
         public DateTime Created { get; set; }
-        public User Creator { get; set; }
-        public User AsignedUser { get; set; }
+        public User? Creator { get; set; }
+        public User? AsignedUser { get; set; }
+        public DateTime Estimate { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public int StoryPoints { get; set; }
+        public TaskStage TaskStage { get; set; }
     }
 }

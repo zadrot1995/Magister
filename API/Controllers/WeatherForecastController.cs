@@ -1,4 +1,7 @@
+using Infrastructure.Interfaces;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
+using Repository.Interfaces;
 
 namespace API.Controllers
 {
@@ -12,10 +15,11 @@ namespace API.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        private readonly ICompanyService _companyService;
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, ICompanyService companyService)
         {
             _logger = logger;
+            _companyService = companyService;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -28,6 +32,12 @@ namespace API.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+        [HttpGet("test")]
+        public async Task<ActionResult<bool>> Test()
+        {
+            var responce = await _companyService.DeleteCompany(new Guid());
+            return Ok(responce);
         }
     }
 }

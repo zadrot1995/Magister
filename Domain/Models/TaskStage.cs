@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Models
 {
-    public class Company : Entity
+    public class TaskStage : Entity
     {
         public string Name { get; set; }
-        public IEnumerable<User> Workers { get; set; }
-        public IEnumerable<Team>? Teams { get; set; }
-        public IEnumerable<Project>? Projects { get; set; }
-
-
     }
 }
