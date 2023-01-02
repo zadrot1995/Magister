@@ -5,18 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Interfaces
+namespace Infrastructure.Interfaces
 {
-    public interface ICompanyRepository : IDisposable
+    public interface ICompanyService
     {
         IEnumerable<Company> GetCompanys();
         Company GetCompanyById(Guid id);
         Task<Company> GetCompanyByIdAsync(Guid id);
         void InsertCompany(Company company);
-        System.Threading.Tasks.Task InsertCompanyAsync(Company company);
-        void DeleteCompany(Company company);
+        void InsertCompanyAsync(Company company);
+        Task<bool> DeleteCompany(Guid id);
         void UpdateCompany(Company company);
-        void Save();
-        System.Threading.Tasks.Task SaveAsync();
     }
 }
