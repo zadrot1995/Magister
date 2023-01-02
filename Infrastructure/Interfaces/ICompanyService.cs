@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Interfaces
 {
-    internal interface ICompanyService
+    public interface ICompanyService
     {
         IEnumerable<Company> GetCompanys();
         Company GetCompanyById(Guid id);
         Task<Company> GetCompanyByIdAsync(Guid id);
         void InsertCompany(Company company);
         void InsertCompanyAsync(Company company);
-        void DeleteCompany(Guid id);
+        Task<bool> DeleteCompany(Guid id);
         void UpdateCompany(Company company);
     }
 }
