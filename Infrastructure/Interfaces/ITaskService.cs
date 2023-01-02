@@ -5,18 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Interfaces
+namespace Infrastructure.Interfaces
 {
-    public interface ITaskRepository : IDisposable
+    public interface ITaskService
     {
         IEnumerable<Domain.Models.Task> GetTasks();
         Domain.Models.Task GetTaskById(Guid id);
         Task<Domain.Models.Task> GetTaskByIdAsync(Guid id);
-        System.Threading.Tasks.Task InsertTask(Domain.Models.Task task);
-        System.Threading.Tasks.Task InsertTaskAsync(Domain.Models.Task task);
-        void DeleteTask(Domain.Models.Task task);
+        void InsertTask(Domain.Models.Task task);
+        void InsertTaskAsync(Domain.Models.Task task);
+        Task<bool> DeleteTask(Guid id);
         void UpdateTask(Domain.Models.Task task);
-        void Save();
-        System.Threading.Tasks.Task SaveAsync();
     }
 }
