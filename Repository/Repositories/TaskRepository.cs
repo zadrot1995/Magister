@@ -51,7 +51,7 @@ namespace Repository.Repositories
             _context.Tasks.Add(task);
         }
 
-        public async void InsertTaskAsync(Domain.Models.Task task)
+        public async System.Threading.Tasks.Task InsertTaskAsync(Domain.Models.Task task)
         {
             await _context.Tasks.AddAsync(task);
         }
@@ -61,7 +61,7 @@ namespace Repository.Repositories
             _context.SaveChanges();
         }
 
-        public async void SaveAsync()
+        public async System.Threading.Tasks.Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }

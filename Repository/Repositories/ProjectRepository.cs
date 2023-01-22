@@ -51,7 +51,7 @@ namespace Repository.Repositories
             _context.Projects.Add(project);
         }
 
-        public async void InsertProjectAsync(Project project)
+        public async System.Threading.Tasks.Task InsertProjectAsync(Project project)
         {
             await _context.Projects.AddAsync(project);
         }
@@ -60,7 +60,7 @@ namespace Repository.Repositories
         {
             _context.SaveChanges();
         }
-        public async void SaveAsync()
+        public async System.Threading.Tasks.Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }

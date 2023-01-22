@@ -12,7 +12,7 @@ namespace Repository.Interfaces
         IEnumerable<Domain.Models.Task> GetTasks();
         Domain.Models.Task GetTaskById(Guid id);
         Task<Domain.Models.Task> GetTaskByIdAsync(Guid id);
-        System.Threading.Tasks.Task InsertTask(Domain.Models.Task task);
+        void InsertTask(Domain.Models.Task task);
         System.Threading.Tasks.Task InsertTaskAsync(Domain.Models.Task task);
         void DeleteTask(Domain.Models.Task task);
         void UpdateTask(Domain.Models.Task task);

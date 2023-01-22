@@ -22,7 +22,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-AppHelper.InjectService(builder.Services);
+AppHelper.InjectRepositories(builder.Services);
+
+AppHelper.InjectServices(builder.Services);
 
 var app = builder.Build();
 
