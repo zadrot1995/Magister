@@ -51,7 +51,7 @@ namespace Repository.Repositories
             _context.Users.Add(user);
         }
 
-        public async void InsertUserAsync(User user)
+        public async System.Threading.Tasks.Task InsertUserAsync(User user)
         {
             await _context.Users.AddAsync(user);
         }
@@ -60,7 +60,7 @@ namespace Repository.Repositories
         {
             _context.SaveChanges();
         }
-        public async void SaveAsync()
+        public async System.Threading.Tasks.Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }

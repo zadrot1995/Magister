@@ -9,7 +9,7 @@ namespace Infrastructure.Interfaces
 {
     public interface ICompanyService
     {
-        IEnumerable<Company> GetCompanys();
+        IEnumerable<Company> GetCompanies();
         Company GetCompanyById(Guid id);
         Task<Company> GetCompanyByIdAsync(Guid id);
         void InsertCompany(Company company);

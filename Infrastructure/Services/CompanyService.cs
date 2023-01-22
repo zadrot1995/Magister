@@ -46,7 +46,7 @@ namespace Infrastructure.Services
 
         public async Task<Company> GetCompanyByIdAsync(Guid id) => await _companyRepository.GetCompanyByIdAsync(id);
 
-        public IEnumerable<Company> GetCompanys() => _companyRepository.GetCompanys();
+        public IEnumerable<Company> GetCompanies() => _companyRepository.GetCompanies();
 
         public void InsertCompany(Company company)
         {
