@@ -51,7 +51,7 @@ namespace Repository.Repositories
             _context.Teams.Add(team);
         }
 
-        public async void InsertTeamAsync(Team team)
+        public async System.Threading.Tasks.Task InsertTeamAsync(Team team)
         {
             await _context.Teams.AddAsync(team);
         }
@@ -61,7 +61,7 @@ namespace Repository.Repositories
             _context.SaveChanges();
         }
 
-        public async void SaveAsync()
+        public async System.Threading.Tasks.Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }

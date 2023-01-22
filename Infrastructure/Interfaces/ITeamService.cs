@@ -5,18 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Interfaces
+namespace Infrastructure.Interfaces
 {
-    public interface ITeamRepository : IDisposable
+    public interface ITeamService
     {
-        IEnumerable<Team> GetTeams();
+        IEnumerable<Team> GetCompanies();
         Team GetTeamById(Guid id);
         Task<Team> GetTeamByIdAsync(Guid id);
         void InsertTeam(Team team);
-        System.Threading.Tasks.Task InsertTeamAsync(Team team);
-        void DeleteTeam(Team team);
+        void InsertTeamAsync(Team team);
+        Task<bool> DeleteTeam(Guid id);
         void UpdateTeam(Team team);
-        void Save();
-        System.Threading.Tasks.Task SaveAsync();
     }
 }
