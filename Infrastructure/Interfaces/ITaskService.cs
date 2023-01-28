@@ -16,5 +16,7 @@ namespace Infrastructure.Interfaces
         void InsertTaskAsync(Domain.Models.Task task);
         Task<bool> DeleteTask(Guid id);
         void UpdateTask(Domain.Models.Task task);
+        Task<bool> UpdateTaskStage(Guid taskId, Guid stageId);
+        Task<bool> InsertTaskStage(Guid taskId, TaskStage stage);
     }
 }

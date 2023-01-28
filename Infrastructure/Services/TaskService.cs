@@ -1,6 +1,7 @@
 ﻿using Domain.DTOs;
 using Domain.Models;
 using Infrastructure.Interfaces;
+using Microsoft.EntityFrameworkCore.Storage;
 using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,29 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Infrastructure.Services
 {
     public class TaskService : ITaskService
     {
         private readonly ITaskRepository _taskRepository;
-
-        public TaskService(ITaskRepository taskRepository)
+        private readonly ITaskStageRepository _taskStageRepository;
+        public TaskService(ITaskRepository taskRepository, ITaskStageRepository taskStageRepository)
         {
             _taskRepository = taskRepository;
+            _taskStageRepository = taskStageRepository;
+        }
+
+        public async Task<bool> InsertTaskStage(Guid taskId, TaskStage stage)
+        {
+            var task = await _taskRepository.GetTaskByIdAsync(taskId);
+            if(task != null)
+            {
+                task.TaskStage = stage;
+                await _taskRepository.SaveAsync();
+            }
+            throw new HttpStatusException(HttpStatusCode.NotFound, "Task not found");
         }
 
         public async Task<bool> DeleteTask(Guid id)
@@ -69,6 +83,22 @@ namespace Infrastructure.Services
                 await _taskRepository.SaveAsync();
             }
             throw new HttpStatusException(HttpStatusCode.BadRequest, "Task cannot be null");
+        }
+
+        public async Task<bool> UpdateTaskStage(Guid taskId, Guid stageId)
+        {
+            if( taskId != Guid.Empty && stageId != Guid.Empty)
+            {
+                var task = _taskRepository.GetTaskById(taskId);
+                if(task != null)
+                {
+                    task.TaskStage.Id = stageId;
+                    await _taskRepository.SaveAsync();
+                    return true;
+                }
+                throw new HttpStatusException(HttpStatusCode.NotFound, "Task not found");
+            }
+            throw new HttpStatusException(HttpStatusCode.BadRequest, "Uncorrect data");
         }
     }
 }

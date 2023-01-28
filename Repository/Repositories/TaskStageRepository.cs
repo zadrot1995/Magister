@@ -50,9 +50,10 @@ namespace Repository.Repositories
         {
             _context.TaskStages.Add(taskStage);
         }
-        public async void InsertTaskStageAsync(TaskStage taskStage)
+        public async Task<bool> InsertTaskStageAsync(TaskStage taskStage)
         {
             await _context.TaskStages.AddAsync(taskStage);
+            return true;
         }
         public void Save()
         {
