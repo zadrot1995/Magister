@@ -41,9 +41,9 @@ namespace Repository.Repositories
             return await _context.Companies.FindAsync(id);
         }
 
-        public IEnumerable<Company> GetCompanies()
+        public IQueryable<Company> GetCompanies()
         {
-            return _context.Companies;
+            return _context.Companies.AsQueryable();
         }
 
         public void InsertCompany(Company company)

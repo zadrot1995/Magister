@@ -14,12 +14,12 @@ namespace Domain.DTOs
 
         public int StatusCode { get; set; }
 
-        public ErrorResponse(Exception ex)
+        public ErrorResponse(Exception ex, int statusCode)
         {
             Type = ex.GetType().Name;
             Message = ex.Message;
             StackTrace = ex.ToString();
-            StatusCode = 500;
+            StatusCode = statusCode;
         }
     }
 }

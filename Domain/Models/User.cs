@@ -19,5 +19,7 @@ namespace Domain.Models
         public int Rate { get; set; }
         public string Description { get; set; }
         public string CVUrl { get; set; }
+        public Guid CompanyId { get; set; }
+        public Company? Company { get; set; }
     }
 }

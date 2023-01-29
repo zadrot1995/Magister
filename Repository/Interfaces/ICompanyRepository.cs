@@ -9,7 +9,7 @@ namespace Repository.Interfaces
 {
     public interface ICompanyRepository : IDisposable
     {
-        IEnumerable<Company> GetCompanies();
+        IQueryable<Company> GetCompanies();
         Company GetCompanyById(Guid id);
         Task<Company> GetCompanyByIdAsync(Guid id);
         void InsertCompany(Company company);

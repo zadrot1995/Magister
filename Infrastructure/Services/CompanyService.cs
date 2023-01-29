@@ -4,6 +4,7 @@ using Domain.DTOs;
 using Domain.Models;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
 using Repository.Interfaces;
 using Repository.Repositories;
 using System;
@@ -13,6 +14,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -44,9 +46,23 @@ namespace Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Company> GetCompanyByIdAsync(Guid id) => await _companyRepository.GetCompanyByIdAsync(id);
+        public async Task<Company> GetCompanyByIdAsync(Guid id)
+        {
+            var result = await _companyRepository.GetCompanyByIdAsync(id);
+            if (result != null)
+            {
+                return result;
+            }
+            throw new HttpStatusException(HttpStatusCode.NotFound, "Company not found");
+        }
 
-        public IEnumerable<Company> GetCompanies() => _companyRepository.GetCompanies();
+        private void ThreadProc(int start, int end, out List<Company> companies)
+        {
+            Range range = new Range(start, end);
+            companies = _companyRepository.GetCompanies().Take(range).ToList();
+        }
+
+        public IQueryable<Company> GetCompanies() => _companyRepository.GetCompanies();
 
         public void InsertCompany(Company company)
         {
@@ -58,12 +74,13 @@ namespace Infrastructure.Services
             throw new HttpStatusException(HttpStatusCode.BadRequest, "Company cannot be null");
         }
 
-        public async void InsertCompanyAsync(Company company)
+        public async Task<bool> InsertCompanyAsync(Company company)
         {
             if (company != null)
             {
                 await _companyRepository.InsertCompanyAsync(company);
                 await _companyRepository.SaveAsync();
+                return true;
             }
             throw new HttpStatusException(HttpStatusCode.BadRequest, "Company cannot be null");
         }

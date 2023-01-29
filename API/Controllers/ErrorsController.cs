@@ -25,7 +25,7 @@ namespace API.Controllers
 
             Response.StatusCode = code; // You can use HttpStatusCode enum instead
 
-            return new ErrorResponse(exception); // Your error model
+            return new ErrorResponse(exception, code); // Your error model
         }
     }
 }
