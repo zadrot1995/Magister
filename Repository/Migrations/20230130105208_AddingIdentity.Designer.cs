@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.DbContexts;
 
@@ -11,9 +12,11 @@ using Repository.DbContexts;
 namespace Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230130105208_AddingIdentity")]
+    partial class AddingIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,9 +198,10 @@ namespace Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CVUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("CompanyId")
+                    b.Property<Guid>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -205,6 +209,7 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -215,6 +220,7 @@ namespace Repository.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -243,7 +249,7 @@ namespace Repository.Migrations
                     b.Property<int>("Rate")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Role")
+                    b.Property<int>("Role")
                         .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
@@ -488,13 +494,17 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Domain.Models.User", b =>
                 {
-                    b.HasOne("Domain.Models.Company", null)
+                    b.HasOne("Domain.Models.Company", "Company")
                         .WithMany("Workers")
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Models.Team", null)
                         .WithMany("Users")
                         .HasForeignKey("TeamId");
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Domain.Models.UserSkill", b =>

@@ -11,6 +11,7 @@ namespace API.Helpers
         {
             services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<IProjectService, ProjectService>();
+            services.AddTransient<IAccountService, AccountService>();
         }
 
         public static void InjectRepositories(IServiceCollection services)
