@@ -9,7 +9,7 @@ namespace Repository.Interfaces
 {
     public interface IProjectRepository : IDisposable
     {
-        IEnumerable<Project> GetProjects();
+        IQueryable<Project> GetProjects();
         Project GetProjectById(Guid id);
         Task<Project> GetProjectByIdAsync(Guid id);
         void InsertProject(Project project);

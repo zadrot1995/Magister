@@ -2,6 +2,7 @@
 using Domain.Models;
 using Infrastructure.Interfaces;
 using Repository.Interfaces;
+using Repository.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,8 @@ namespace Infrastructure.Services
 
         public async Task<Project> GetProjectByIdAsync(Guid id) => await _projectRepository.GetProjectByIdAsync(id);
 
-        public IEnumerable<Project> GetProjects() => _projectRepository.GetProjects();
+        public IQueryable<Project> GetProjects() => _projectRepository.GetProjects();
+
 
         public void InsertProject(Project project)
         {
@@ -51,22 +53,24 @@ namespace Infrastructure.Services
             throw new HttpStatusException(HttpStatusCode.BadRequest, "Project cannot be null");
         }
 
-        public async void InsertProjectAsync(Project project)
+        public async System.Threading.Tasks.Task<bool> InsertProjectAsync(Project project)
         {
             if (project != null)
             {
                 await _projectRepository.InsertProjectAsync(project);
                 await _projectRepository.SaveAsync();
+                return true;
             }
             throw new HttpStatusException(HttpStatusCode.BadRequest, "Project cannot be null");
         }
 
-        public async void UpdateProject(Project project)
+        public async Task<bool> UpdateProject(Project project)
         {
             if (project != null)
             {
                 _projectRepository.UpdateProject(project);
                 await _projectRepository.SaveAsync();
+                return true;
             }
             throw new HttpStatusException(HttpStatusCode.BadRequest, "Project cannot be null");
         }

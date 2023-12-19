@@ -41,7 +41,7 @@ namespace Repository.Repositories
             return await _context.Projects.FindAsync(id);
         }
 
-        public IEnumerable<Project> GetProjects()
+        public IQueryable<Project> GetProjects()
         {
             return _context.Projects;
         }

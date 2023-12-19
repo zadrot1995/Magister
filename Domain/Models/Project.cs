@@ -15,5 +15,9 @@ namespace Domain.Models
         public ProjectStages ProjectStages { get; set; }
         public IEnumerable<Task>? Tasks { get; set; }
         public IEnumerable<Team>? Teams { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? Category { get; set; }
+        public string? Type { get; set; }
+        public string? ManagementSystem { get; set; }
     }
 }

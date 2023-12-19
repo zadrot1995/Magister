@@ -9,12 +9,12 @@ namespace Infrastructure.Interfaces
 {
     public interface IProjectService
     {
-        IEnumerable<Project> GetProjects();
+        IQueryable<Project> GetProjects();
         Project GetProjectById(Guid id);
         Task<Project> GetProjectByIdAsync(Guid id);
         void InsertProject(Project project);
-        void InsertProjectAsync(Project project);
+        System.Threading.Tasks.Task<bool> InsertProjectAsync(Project project);
         Task<bool> DeleteProject(Guid id);
-        void UpdateProject(Project project);
+        Task<bool> UpdateProject(Project project);
     }
 }
