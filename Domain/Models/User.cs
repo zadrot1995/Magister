@@ -11,11 +11,15 @@ namespace Domain.Models
 {
     public class User : IdentityUser
     {
-        public string? FullName { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         public UserRoles? Role { get; set; }
         public IEnumerable<UserSkill>? UserSkills { get; set; }
         public int Rate { get; set; }
         public string? Description { get; set; }
         public string? CVUrl { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
+
     }
 }

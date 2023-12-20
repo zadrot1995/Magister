@@ -29,10 +29,10 @@ namespace Infrastructure.Services
         public async Task<User> Login(LoginModel model)
         {
             var result =
-                await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
             if (result.Succeeded)
             {
-                var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == model.Email);
+                var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == model.Login);
                 return user;
             }
             else
@@ -48,7 +48,7 @@ namespace Infrastructure.Services
 
         public async Task<User> Register(RegisterModel model)
         {
-            User user = new User { Email = model.Email, UserName = model.Email };
+            User user = new User { Email = model.Login, UserName = model.Login };
             // добавляем пользователя
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)

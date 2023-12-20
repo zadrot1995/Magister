@@ -11,7 +11,7 @@ namespace Domain.DTOs
     public class LoginModel
     {
         [Required]
-        public string Email { get; set; }
+        public string Login { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
