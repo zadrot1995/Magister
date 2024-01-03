@@ -61,12 +61,13 @@ namespace Infrastructure.Services
             throw new HttpStatusException(HttpStatusCode.BadRequest, "User cannot be null");
         }
 
-        public async void UpdateUser(User user)
+        public async Task<User> UpdateUser(User user)
         {
             if (user != null)
             {
-                _userRepository.UpdateUser(user);
+                var result = await _userRepository.UpdateUser(user);
                 await _userRepository.SaveAsync();
+                return(result);
             }
             throw new HttpStatusException(HttpStatusCode.BadRequest, "User cannot be null");
         }

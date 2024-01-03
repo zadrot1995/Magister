@@ -15,7 +15,7 @@ namespace Repository.Interfaces
         void InsertUser(User user);
         System.Threading.Tasks.Task InsertUserAsync(User user);
         void DeleteUser(User user);
-        void UpdateUser(User user);
+        Task<User> UpdateUser(User user);
         void Save();
         System.Threading.Tasks.Task SaveAsync();
     }

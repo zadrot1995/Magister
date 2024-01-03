@@ -1,4 +1,5 @@
 ﻿using Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repository.DbContexts;
 using Repository.Interfaces;
@@ -15,10 +16,12 @@ namespace Repository.Repositories
         private bool disposed = false;
 
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public UserRepository(ApplicationDbContext context)
+        public UserRepository(ApplicationDbContext context, UserManager<User> userManager)
         {
             this._context = context;
+            _userManager = userManager;
         }
 
         public void DeleteUser(User user)
@@ -65,9 +68,23 @@ namespace Repository.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public void UpdateUser(User user)
+        public async Task<User> UpdateUser(User user)
         {
-            _context.Entry(user).State = EntityState.Modified;
+            // Get the existing student from the db
+            var userToUpdate = await _userManager.FindByIdAsync(user.Id);
+
+            // Update it with the values from the view model
+            userToUpdate.UserName= user.UserName;
+            userToUpdate.Email= user.Email;
+            userToUpdate.Position= user.Position;
+            userToUpdate.FirstName= user.FirstName;
+            userToUpdate.LastName= user.LastName;
+            userToUpdate.Description= user.Description;
+            userToUpdate.PhotoUrl= user.PhotoUrl;
+
+            // Apply the changes if any to the db
+            await _userManager.UpdateAsync(userToUpdate);
+            return userToUpdate;
         }
         protected virtual void Dispose(bool disposing)
         {

@@ -66,9 +66,7 @@ namespace API.Controllers
             var user = await _userManager.FindByNameAsync(loginModel.Login)
                       ?? await _userManager.FindByEmailAsync(loginModel.Login);
 
-
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginModel.Password, false);
-
 
 
             if (!result.Succeeded)
@@ -85,10 +83,11 @@ namespace API.Controllers
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
             _context.SaveChanges();
-            return Ok(new AuthenticatedResponse
+            return Ok(new LoginResponse
             {
                 Token = accessToken,
-                RefreshToken = refreshToken
+                RefreshToken = refreshToken,
+                UserData = user
             });
         }
 

@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    internal class UserSkillsRepository : IUserSkillsRepository, IDisposable
+    internal class TechnologyRepository : ITechnologyRepository, IDisposable
     {
         private bool disposed = false;
 
         private readonly ApplicationDbContext _context;
 
-        public UserSkillsRepository(ApplicationDbContext context)
+        public TechnologyRepository(ApplicationDbContext context)
         {
             this._context = context;
         }
 
-        public void DeleteUserSkill(UserSkill userSkill)
+        public void Delete(Technology userSkill)
         {
-            _context.UserSkills.Remove(userSkill);
+            _context.Technologies.Remove(userSkill);
         }
 
         public void Dispose()
@@ -32,27 +32,27 @@ namespace Repository.Repositories
             GC.SuppressFinalize(this);
         }
 
-        public UserSkill GetUserSkillById(Guid id)
+        public Technology Get(Guid id)
         {
-            return _context.UserSkills.Find(id);
+            return _context.Technologies.Find(id);
         }
-        public async Task<UserSkill> GetUserSkillByIdAsync(Guid id)
+        public async Task<Technology> GetAsync(Guid id)
         {
-            return await _context.UserSkills.FindAsync(id);
-        }
-
-        public IEnumerable<UserSkill> GetUserSkills()
-        {
-            return _context.UserSkills;
+            return await _context.Technologies.FindAsync(id);
         }
 
-        public void InsertUserSkill(UserSkill userSkill)
+        public IEnumerable<Technology> Get()
         {
-            _context.UserSkills.Add(userSkill);
+            return _context.Technologies;
         }
-        public async void InsertUserSkillAsync(UserSkill userSkill)
+
+        public void Insert(Technology userSkill)
         {
-            await _context.UserSkills.AddAsync(userSkill);
+            _context.Technologies.Add(userSkill);
+        }
+        public async void InsertAsync(Technology userSkill)
+        {
+            await _context.Technologies.AddAsync(userSkill);
         }
         public void Save()
         {
@@ -63,7 +63,7 @@ namespace Repository.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public void UpdateUserSkill(UserSkill userSkill)
+        public void Update(Technology userSkill)
         {
             _context.Entry(userSkill).State = EntityState.Modified;
         }

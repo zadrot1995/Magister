@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.DbContexts;
 
@@ -11,9 +12,11 @@ using Repository.DbContexts;
 namespace Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240101121620_RefactoringTechnologyTable2")]
+    partial class RefactoringTechnologyTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,15 +41,7 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("OwnerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("OwnerId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("OwnerId1");
 
                     b.ToTable("Companies");
                 });
@@ -298,19 +293,13 @@ namespace Repository.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PhotoUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Position")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Rate")
+                    b.Property<int>("Rate")
                         .HasColumnType("int");
 
                     b.Property<string>("RefreshToken")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("Role")
@@ -494,15 +483,6 @@ namespace Repository.Migrations
                     b.ToTable("ProjectTechnology");
                 });
 
-            modelBuilder.Entity("Domain.Models.Company", b =>
-                {
-                    b.HasOne("Domain.Models.User", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId1");
-
-                    b.Navigation("Owner");
-                });
-
             modelBuilder.Entity("Domain.Models.Project", b =>
                 {
                     b.HasOne("Domain.Models.Company", null)
@@ -557,7 +537,7 @@ namespace Repository.Migrations
             modelBuilder.Entity("Domain.Models.Technology", b =>
                 {
                     b.HasOne("Domain.Models.Company", "Company")
-                        .WithMany("Technologies")
+                        .WithMany("Technology")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -652,7 +632,7 @@ namespace Repository.Migrations
 
                     b.Navigation("Teams");
 
-                    b.Navigation("Technologies");
+                    b.Navigation("Technology");
 
                     b.Navigation("Workers");
                 });

@@ -15,6 +15,6 @@ namespace Infrastructure.Interfaces
         void InsertUser(User company);
         System.Threading.Tasks.Task InsertUserAsync(User company);
         Task<bool> DeleteUser(Guid id);
-        void UpdateUser(User company);
+        Task<User> UpdateUser(User company);
     }
 }

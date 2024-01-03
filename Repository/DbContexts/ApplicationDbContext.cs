@@ -16,10 +16,11 @@ namespace Repository.DbContexts
         public DbSet<Domain.Models.Task> Tasks { get; set; }
         public DbSet<TaskStage> TaskStages { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<UserSkill> UserSkills { get; set; }
+        public DbSet<Technology> Technologies { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+        
     }
 }
