@@ -13,7 +13,7 @@ namespace Infrastructure.Interfaces
         Company GetCompanyById(Guid id);
         Task<Company> GetCompanyByIdAsync(Guid id);
         void InsertCompany(Company company);
-        System.Threading.Tasks.Task<bool> InsertCompanyAsync(Company company);
+        System.Threading.Tasks.Task<Company> InsertCompanyAsync(Company company);
         Task<bool> DeleteCompany(Guid id);
         void UpdateCompany(Company company);
     }

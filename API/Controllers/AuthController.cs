@@ -63,8 +63,11 @@ namespace API.Controllers
                 return BadRequest("Invalid client request");
             }
 
-            var user = await _userManager.FindByNameAsync(loginModel.Login)
-                      ?? await _userManager.FindByEmailAsync(loginModel.Login);
+            var user = await _userManager.Users
+                .Include(u => u.UserSkills)
+                .Include(u => u.Company)
+                .Include(u => u.OwnCompany)
+                .FirstOrDefaultAsync(u => u.UserName == loginModel.Login);
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginModel.Password, false);
 

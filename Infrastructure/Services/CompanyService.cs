@@ -74,13 +74,13 @@ namespace Infrastructure.Services
             throw new HttpStatusException(HttpStatusCode.BadRequest, "Company cannot be null");
         }
 
-        public async Task<bool> InsertCompanyAsync(Company company)
+        public async Task<Company> InsertCompanyAsync(Company company)
         {
             if (company != null)
             {
                 await _companyRepository.InsertCompanyAsync(company);
                 await _companyRepository.SaveAsync();
-                return true;
+                return company;
             }
             throw new HttpStatusException(HttpStatusCode.BadRequest, "Company cannot be null");
         }

@@ -3,8 +3,10 @@ using Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Domain.Models
@@ -22,6 +24,12 @@ namespace Domain.Models
         public DateTime? RefreshTokenExpiryTime { get; set; }
         public string? Position { get; set; }
         public string? PhotoUrl { get; set; }
+        public Guid? CompanyId { get; set; }
+        public Company? Company { get; set; }
+        public Guid? OwnCompanyId { get; set; }
+        [JsonIgnore]
+        public Company? OwnCompany { get; set; }
+       
 
     }
 }

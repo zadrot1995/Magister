@@ -32,9 +32,11 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     options.Password.RequiredLength = 1;
     options.Password.RequiredUniqueChars = 1;
 })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders(); ;
 
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
+
 
 builder.Services.AddAuthentication(opt =>
 {

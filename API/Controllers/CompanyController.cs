@@ -34,7 +34,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<bool>> InsertCompany([FromBody] Company company) 
+        public async Task<ActionResult<Company>> InsertCompany([FromBody] Company company) 
         {
             return Ok(await _companyService.InsertCompanyAsync(company));
         }

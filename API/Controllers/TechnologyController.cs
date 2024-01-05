@@ -22,5 +22,16 @@ namespace API.Controllers
         {
             return await _dbContext.Technologies.ToListAsync();
         }
+        [HttpPost]
+        public async Task<ActionResult> Create(Technology technology)
+        {
+            if(technology == null) 
+            {
+                return BadRequest();
+            }
+            await _dbContext.Technologies.AddAsync(technology);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

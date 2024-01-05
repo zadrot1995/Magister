@@ -1,4 +1,6 @@
 ﻿using Domain.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repository.DbContexts;
 using Repository.Interfaces;
@@ -13,12 +15,15 @@ namespace Repository.Repositories
     public class CompanyRepository : ICompanyRepository, IDisposable
     {
         private bool disposed = false;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
 
         private readonly ApplicationDbContext _context;
 
         public CompanyRepository(ApplicationDbContext context)
         {
             this._context = context;
+
         }
 
         public void DeleteCompany(Company company)
@@ -52,6 +57,23 @@ namespace Repository.Repositories
         }
         public async System.Threading.Tasks.Task InsertCompanyAsync(Company company)
         {
+            if(company.ManagementSystem != null)
+            {
+                
+                var options = await _context.Options.Where(x => company.ManagementSystem.Select(y => y.Id).Contains(x.Id)).ToListAsync();
+                company.ManagementSystem = options;
+            }
+            if (company.Type != null)
+            {
+                var options = await _context.Options.Where(x => company.Type.Select(y => y.Id).Contains(x.Id)).ToListAsync();
+                company.Type = options;
+            }
+            if (company.Category != null)
+            {
+                var options = await _context.Options.Where(x => company.Category.Select(y => y.Id).Contains(x.Id)).ToListAsync();
+                company.Category = options;
+            }
+
             await _context.Companies.AddAsync(company);
         }
         public void Save()

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Repository.Repositories
 {
@@ -71,7 +72,7 @@ namespace Repository.Repositories
         public async Task<User> UpdateUser(User user)
         {
             // Get the existing student from the db
-            var userToUpdate = await _userManager.FindByIdAsync(user.Id);
+            var userToUpdate = await _userManager.Users.Include(x => x.UserSkills).Where(x => x.Id == user.Id).FirstOrDefaultAsync();
 
             // Update it with the values from the view model
             userToUpdate.UserName= user.UserName;
@@ -81,9 +82,16 @@ namespace Repository.Repositories
             userToUpdate.LastName= user.LastName;
             userToUpdate.Description= user.Description;
             userToUpdate.PhotoUrl= user.PhotoUrl;
-
+            if(user.UserSkills != null)
+            {
+                var skills = await _context.Technologies.Where(t => user.UserSkills.Select(x => x.Id).Contains(t.Id)).ToListAsync();
+                userToUpdate.UserSkills = skills;
+            }
             // Apply the changes if any to the db
-            await _userManager.UpdateAsync(userToUpdate);
+
+            //await _userManager.UpdateAsync(userToUpdate);
+            _context.Entry(userToUpdate).State = EntityState.Modified;
+
             return userToUpdate;
         }
         protected virtual void Dispose(bool disposing)

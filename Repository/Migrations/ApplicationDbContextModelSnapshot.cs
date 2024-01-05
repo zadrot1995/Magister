@@ -38,17 +38,54 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("OwnerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("OwnerId1")
+                    b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId1");
+                    b.HasIndex("OwnerId")
+                        .IsUnique()
+                        .HasFilter("[OwnerId] IS NOT NULL");
 
                     b.ToTable("Companies");
+                });
+
+            modelBuilder.Entity("Domain.Models.Option", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ManagementSystemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("OptionContext")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ManagementSystemId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("Options");
                 });
 
             modelBuilder.Entity("Domain.Models.Project", b =>
@@ -212,7 +249,7 @@ namespace Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CompanyId")
+                    b.Property<Guid?>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Created")
@@ -229,14 +266,9 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Technologies");
                 });
@@ -288,6 +320,9 @@ namespace Repository.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<Guid?>("OwnCompanyId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -494,13 +529,49 @@ namespace Repository.Migrations
                     b.ToTable("ProjectTechnology");
                 });
 
+            modelBuilder.Entity("TechnologyUser", b =>
+                {
+                    b.Property<Guid>("UserSkillsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserSkillsId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("TechnologyUser");
+                });
+
             modelBuilder.Entity("Domain.Models.Company", b =>
                 {
                     b.HasOne("Domain.Models.User", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId1");
+                        .WithOne("OwnCompany")
+                        .HasForeignKey("Domain.Models.Company", "OwnerId");
 
                     b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("Domain.Models.Option", b =>
+                {
+                    b.HasOne("Domain.Models.Company", "Category")
+                        .WithMany("Category")
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("Domain.Models.Company", "ManagementSystem")
+                        .WithMany("ManagementSystem")
+                        .HasForeignKey("ManagementSystemId");
+
+                    b.HasOne("Domain.Models.Company", "Type")
+                        .WithMany("Type")
+                        .HasForeignKey("TypeId");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("ManagementSystem");
+
+                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("Domain.Models.Project", b =>
@@ -558,26 +629,22 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Domain.Models.Company", "Company")
                         .WithMany("Technologies")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Models.User", null)
-                        .WithMany("UserSkills")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("CompanyId");
 
                     b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Domain.Models.User", b =>
                 {
-                    b.HasOne("Domain.Models.Company", null)
+                    b.HasOne("Domain.Models.Company", "Company")
                         .WithMany("Workers")
                         .HasForeignKey("CompanyId");
 
                     b.HasOne("Domain.Models.Team", null)
                         .WithMany("Users")
                         .HasForeignKey("TeamId");
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -646,13 +713,34 @@ namespace Repository.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TechnologyUser", b =>
+                {
+                    b.HasOne("Domain.Models.Technology", null)
+                        .WithMany()
+                        .HasForeignKey("UserSkillsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.Models.Company", b =>
                 {
+                    b.Navigation("Category");
+
+                    b.Navigation("ManagementSystem");
+
                     b.Navigation("Projects");
 
                     b.Navigation("Teams");
 
                     b.Navigation("Technologies");
+
+                    b.Navigation("Type");
 
                     b.Navigation("Workers");
                 });
@@ -671,7 +759,7 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Domain.Models.User", b =>
                 {
-                    b.Navigation("UserSkills");
+                    b.Navigation("OwnCompany");
                 });
 #pragma warning restore 612, 618
         }

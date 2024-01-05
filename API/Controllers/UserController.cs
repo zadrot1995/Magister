@@ -25,11 +25,13 @@ namespace API.Controllers
 
             return true;
         }
+
         [HttpPut]
         public async Task<ActionResult<User>> Update(User user)
         {
             var result = await _userService.UpdateUser(user);
             return Ok(result);
         }
+
     }
 }
