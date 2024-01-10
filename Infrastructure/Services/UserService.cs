@@ -20,7 +20,7 @@ namespace Infrastructure.Services
             _userRepository = userRepository;
         }
 
-        public async Task<bool> DeleteUser(Guid id)
+        public async Task<bool> DeleteUser(string id)
         {
             var user = await _userRepository.GetUserByIdAsync(id);
             if (user == null)
@@ -37,7 +37,12 @@ namespace Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public async Task<User> GetUserByIdAsync(Guid id) => await _userRepository.GetUserByIdAsync(id);
+        public async Task<User> GetUserByIdAsync(string id) => await _userRepository.GetUserByIdAsync(id);
+        public async Task<Company> GetUserCompanyAsync(string userId)
+        {
+            var result = await _userRepository.GetUserCompanyAsync(userId);
+            return result;
+        }
 
         public IEnumerable<User> GetUsers() => _userRepository.GetUsers();
 

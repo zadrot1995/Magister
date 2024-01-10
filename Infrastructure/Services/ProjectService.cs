@@ -68,7 +68,7 @@ namespace Infrastructure.Services
         {
             if (project != null)
             {
-                _projectRepository.UpdateProject(project);
+                await _projectRepository.UpdateProject(project);
                 await _projectRepository.SaveAsync();
                 return true;
             }

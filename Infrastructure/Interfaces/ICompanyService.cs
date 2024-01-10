@@ -15,6 +15,6 @@ namespace Infrastructure.Interfaces
         void InsertCompany(Company company);
         System.Threading.Tasks.Task<Company> InsertCompanyAsync(Company company);
         Task<bool> DeleteCompany(Guid id);
-        void UpdateCompany(Company company);
+        Task<bool> UpdateCompany(Company company);
     }
 }

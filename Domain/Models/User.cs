@@ -26,10 +26,7 @@ namespace Domain.Models
         public string? PhotoUrl { get; set; }
         public Guid? CompanyId { get; set; }
         public Company? Company { get; set; }
-        public Guid? OwnCompanyId { get; set; }
-        [JsonIgnore]
-        public Company? OwnCompany { get; set; }
-       
+        public IEnumerable<Project> Projects { get; set; }
 
     }
 }

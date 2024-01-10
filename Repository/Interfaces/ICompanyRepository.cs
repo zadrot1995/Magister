@@ -15,7 +15,7 @@ namespace Repository.Interfaces
         void InsertCompany(Company company);
         System.Threading.Tasks.Task InsertCompanyAsync(Company company);
         void DeleteCompany(Company company);
-        void UpdateCompany(Company company);
+        System.Threading.Tasks.Task UpdateCompany(Company company);
         void Save();
         System.Threading.Tasks.Task SaveAsync();
     }

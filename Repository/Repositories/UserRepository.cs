@@ -40,9 +40,26 @@ namespace Repository.Repositories
         {
             return _context.Users.Find(id);
         }
-        public async Task<User> GetUserByIdAsync(Guid id)
+        public async Task<User> GetUserByIdAsync(string id)
         {
             return await _context.Users.FindAsync(id);
+        }
+        public async Task<Company> GetUserCompanyAsync(string id)
+        {
+            var result = (await _context.Users
+                .Include(x => x.Company)
+                    .ThenInclude(x => x.Type)
+                .Include(x => x.Company)
+                    .ThenInclude(x => x.Category)
+                .Include(x => x.Company)
+                    .ThenInclude(x => x.ManagementSystem)
+                .Include(x => x.Company)
+                    .ThenInclude(x => x.Workers)
+                .Include(x => x.Company)
+                    .ThenInclude(x => x.Technologies)
+                .Where(x => x.Id == id).FirstOrDefaultAsync()).Company;
+
+            return result;
         }
 
         public IEnumerable<User> GetUsers()

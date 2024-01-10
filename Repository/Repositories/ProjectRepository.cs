@@ -1,4 +1,6 @@
-﻿using Domain.Models;
+﻿using Domain.Abstract;
+using Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Repository.DbContexts;
 using Repository.Interfaces;
@@ -15,10 +17,14 @@ namespace Repository.Repositories
         private bool disposed = false;
 
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public ProjectRepository(ApplicationDbContext context)
+
+        public ProjectRepository(ApplicationDbContext context, UserManager<User> userManager)
         {
             this._context = context;
+
+            _userManager = userManager;
         }
 
         public void DeleteProject(Project project)
@@ -38,7 +44,12 @@ namespace Repository.Repositories
         }
         public async Task<Project> GetProjectByIdAsync(Guid id)
         {
-            return await _context.Projects.FindAsync(id);
+            var result = await _context.Projects
+                .Include(x => x.Team)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+            var test = result;
+            return result;
         }
 
         public IQueryable<Project> GetProjects()
@@ -53,7 +64,22 @@ namespace Repository.Repositories
 
         public async System.Threading.Tasks.Task InsertProjectAsync(Project project)
         {
-            await _context.Projects.AddAsync(project);
+            var company = await _userManager.Users
+                .Include(x => x.Company)
+                .ThenInclude(x => x.Projects)
+                .Where(x => x.Id == project.CreatorId).Select(x => x.Company).FirstOrDefaultAsync();
+            if (company != null)
+            {
+                if(company.Projects == null)
+                {
+                    company.Projects = new List<Project>();
+                }
+                await _context.Projects.AddAsync(project);
+
+                project.Company = company;
+                project.CompanyId = company.Id;
+            }
+
         }
 
         public void Save()
@@ -65,8 +91,24 @@ namespace Repository.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public void UpdateProject(Project project)
+        public async System.Threading.Tasks.Task UpdateProject(Project project)
         {
+            var projectToUpdate = await _context.Projects
+                .Include(x => x.Team)
+                .Where(x => x.Id == project.Id)
+                .FirstOrDefaultAsync();
+
+            projectToUpdate.Name = project.Name;
+            projectToUpdate.ManagementSystem = project.ManagementSystem;
+            projectToUpdate.Category = project.Category;
+            projectToUpdate.Type = project.Type;
+            projectToUpdate.Description = project.Description;
+
+            if (project.Team != null)
+            {
+                var team = await _context.Users.Where(x => project.Team.Select(y => y.Id).Contains(x.Id)).ToListAsync();
+                projectToUpdate.Team = team;
+            }
             _context.Entry(project).State = EntityState.Modified;
         }
         protected virtual void Dispose(bool disposing)

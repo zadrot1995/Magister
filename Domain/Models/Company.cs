@@ -11,7 +11,6 @@ namespace Domain.Models
     public class Company : Entity
     {
         public string? OwnerId { get; set; }
-        public User? Owner { get; set; }
         public string Name { get; set; }
         public IEnumerable<User>? Workers { get; set; }
         public IEnumerable<Team>? Teams { get; set; }
@@ -20,5 +19,8 @@ namespace Domain.Models
         public IEnumerable<Option>? Category { get; set; }
         public IEnumerable<Option>? Type { get; set; }
         public IEnumerable<Option>? ManagementSystem { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? Description { get; set; }
+
     }
 }

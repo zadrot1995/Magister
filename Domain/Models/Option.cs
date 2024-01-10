@@ -16,15 +16,15 @@ namespace Domain.Models
         
         public Guid? CategoryId { get; set; }
         [JsonIgnore]
-        public Company? Category { get; set; }
+        public IEnumerable<Company>? Category { get; set; }
 
         public Guid? ManagementSystemId { get; set; }
         [JsonIgnore]
-        public Company? ManagementSystem{ get; set; }
+        public IEnumerable<Company>? ManagementSystem{ get; set; }
 
         public Guid? TypeId { get; set; }
         [JsonIgnore]
-        public Company? Type { get; set; }
+        public IEnumerable<Company>? Type { get; set; }
 
     }
 }

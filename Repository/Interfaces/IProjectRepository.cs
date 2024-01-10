@@ -15,7 +15,7 @@ namespace Repository.Interfaces
         void InsertProject(Project project);
         System.Threading.Tasks.Task InsertProjectAsync(Project project);
         void DeleteProject(Project project);
-        void UpdateProject(Project project);
+        System.Threading.Tasks.Task UpdateProject(Project project);
         void Save();
         System.Threading.Tasks.Task SaveAsync();
     }

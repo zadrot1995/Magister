@@ -74,6 +74,8 @@ AppHelper.InjectRepositories(builder.Services);
 AppHelper.InjectServices(builder.Services);
 
 
+
+
 var app = builder.Build();
 
 app.UseExceptionHandler("/error"); // Add this

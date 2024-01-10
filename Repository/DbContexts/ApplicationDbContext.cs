@@ -31,26 +31,36 @@ namespace Repository.DbContexts
                 .HasMany(e => e.UserSkills)
             .WithMany(e => e.Users);
 
-            modelBuilder.Entity<Company>()
-            .HasMany(e => e.Category)
-            .WithOne(e => e.Category);
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Projects)
+            .WithMany(e => e.Team);
 
             modelBuilder.Entity<Company>()
-           .HasMany(e => e.Type)
-           .WithOne(e => e.Type);
+               .HasMany(e => e.Technologies)
+           .WithMany(e => e.Companies);
 
             modelBuilder.Entity<Company>()
-           .HasMany(e => e.ManagementSystem)
-           .WithOne(e => e.ManagementSystem);
+               .HasMany(e => e.Category)
+           .WithMany(e => e.Category);
+
+            modelBuilder.Entity<Company>()
+              .HasMany(e => e.Type)
+          .WithMany(e => e.Type);
+
+            modelBuilder.Entity<Company>()
+              .HasMany(e => e.ManagementSystem)
+          .WithMany(e => e.ManagementSystem);
 
             modelBuilder.Entity<User>()
-            .HasOne(u => u.Company)
-            .WithMany(c => c.Workers);
+                .HasOne(e => e.Company)
+            .WithMany(e => e.Workers)
+            .HasForeignKey(ur => ur.CompanyId);
 
-            modelBuilder.Entity<Company>()
-        .HasOne(c => c.Owner)      // One Company has one Owner (User)
-        .WithOne(u => u.OwnCompany)   // One User belongs to one Company
-        .HasForeignKey<Company>(u => u.OwnerId); // Foreign key in User
+            modelBuilder.Entity<Project>()
+               .HasOne(e => e.Company)
+           .WithMany(e => e.Projects)
+           .HasForeignKey(ur => ur.CompanyId);
+
         }
 
     }

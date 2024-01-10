@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Infrastructure.Services.AccountService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAACAAAABAAAIAAAABAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Services\AccountService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Infrastructure.Services.CompanyService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAEQAAAiAEABAAAEAQAAAAAAAAAA=</HashCode>
+      <FileName>Services\CompanyService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Infrastructure.Services.ProjectService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAABAAgAAAAAAgAAACAAgAAAQAAIAAAAAAA=</HashCode>
+      <FileName>Services\ProjectService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Infrastructure.Services.TaskService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIABABAAAAAAAAABAAAAAAAwBAAAAgAAAAIACBAAAA=</HashCode>
+      <FileName>Services\TaskService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Infrastructure.Services.TeamService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAQAAAAAAAAARCAAAACAAAAAAgEAAAAAAA=</HashCode>
+      <FileName>Services\TeamService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Infrastructure.Services.TechnologyService" Collapsed="true">
+    <Position X="5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\TechnologyService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Infrastructure.Services.TokenService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAEAAACAAAA=</HashCode>
+      <FileName>Services\TokenService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Infrastructure.Services.UserService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAoAQAAAQAEAAAAAAEAAQAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Services\UserService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="Infrastructure.Interfaces.IAccountService" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAIAAAABAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Interfaces\IAccountService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Infrastructure.Interfaces.ICompanyService" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAEQAAACAAABAAAEAQAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ICompanyService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Infrastructure.Interfaces.IProjectService" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAABAAgAAAAAAgAAACAAAAAAQAAIAAAAAAA=</HashCode>
+      <FileName>Interfaces\IProjectService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Infrastructure.Interfaces.ITaskService" Collapsed="true">
+    <Position X="7" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIABABAAAAAAAAABAAAAAAAgBAAAAgAAAAIAABAAAA=</HashCode>
+      <FileName>Interfaces\ITaskService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Infrastructure.Interfaces.ITeamService" Collapsed="true">
+    <Position X="8.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAQAAAAAAAAARCAAAACAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Interfaces\ITeamService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Infrastructure.Interfaces.ITokenService" Collapsed="true">
+    <Position X="10.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAEAAACAAAA=</HashCode>
+      <FileName>Interfaces\ITokenService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Infrastructure.Interfaces.IUserService" Collapsed="true">
+    <Position X="7" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAIAQAAAQAEAAAAAAEAAQAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Interfaces\IUserService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

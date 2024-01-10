@@ -39,5 +39,11 @@ namespace API.Controllers
             return Ok(await _companyService.InsertCompanyAsync(company));
         }
 
+        [HttpPut]
+        public async Task<ActionResult<Company>> Update([FromBody] Company company)
+        {
+            return Ok(await _companyService.UpdateCompany(company));
+        }
+
     }
 }

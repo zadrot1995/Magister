@@ -65,9 +65,8 @@ namespace API.Controllers
 
             var user = await _userManager.Users
                 .Include(u => u.UserSkills)
-                .Include(u => u.Company)
-                .Include(u => u.OwnCompany)
                 .FirstOrDefaultAsync(u => u.UserName == loginModel.Login);
+
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginModel.Password, false);
 

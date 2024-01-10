@@ -10,8 +10,8 @@ namespace Domain.Models
 {
     public class Technology : Entity
     {
-        public Guid? CompanyId { get; set; }
-        public Company? Company { get; set;  }
+        [JsonIgnore]
+        public IEnumerable<Company>? Companies { get; set;  }
         public IEnumerable<Project>? Projects { get; set; }
         [JsonIgnore]
         public IEnumerable<User>? Users { get; set; }

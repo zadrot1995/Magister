@@ -11,10 +11,12 @@ namespace Infrastructure.Interfaces
     {
         IEnumerable<User> GetUsers();
         User GetUserById(Guid id);
-        Task<User> GetUserByIdAsync(Guid id);
+        Task<User> GetUserByIdAsync(string id);
         void InsertUser(User company);
         System.Threading.Tasks.Task InsertUserAsync(User company);
-        Task<bool> DeleteUser(Guid id);
+        Task<Company> GetUserCompanyAsync(string userId);
+
+        Task<bool> DeleteUser(string id);
         Task<User> UpdateUser(User company);
     }
 }
